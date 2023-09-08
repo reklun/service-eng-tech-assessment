@@ -32,7 +32,7 @@ Once you have completed you solution share the github repo with your HR contact 
 ### Task data files
 json data examples can be found here:
 
-1. Melbourne pedestrian data - newer version or different format can be downloaded [Here](https://discover.data.vic.gov.au/dataset/pedestrian-counting-system-monthly-counts-per-hour)
+1. Melbourne pedestrian data - newer version or different format can be downloaded [Here](https://discover.data.vic.gov.au/dataset/pedestrian-counting-system-counts-per-hour)
 2. Location data - newer version or different format can be downloaded [Here](https://discover.data.vic.gov.au/dataset/pedestrian-counting-system-sensor-locations)
 
 Pedestrian data example
