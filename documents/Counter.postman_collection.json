@@ -1,0 +1,348 @@
+{
+	"info": {
+		"_postman_id": "8dbaed4a-bf5f-4ca0-befc-8605c2fd6b33",
+		"name": "Counter",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8611517"
+	},
+	"item": [
+		{
+			"name": "post device location data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\n    \"location_id\": 100,\n    \"sensor_description\": \"Bourke Street Mall (South)\",\n    \"sensor_name\": \"Bou283_T\",\n    \"installation_date\": \"2020-03-30\",\n    \"note\": null,\n    \"location_type\": \"Outdoor\",\n    \"status\": \"A\",\n    \"direction_1\": \"East\",\n    \"direction_2\": \"West\",\n    \"latitude\": -37.81380668,\n    \"longitude\": 144.96516718,\n    \"location\": {\n      \"lon\": 144.96516718,\n      \"lat\": -37.81380668\n    }\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:6060/v1/postDevice",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6060",
+					"path": [
+						"v1",
+						"postDevice"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post device location data wrong direction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\n    \"location_id\": 10,\n    \"sensor_description\": \"Bourke Street Mall (South)\",\n    \"sensor_name\": \"Bou283_T\",\n    \"installation_date\": \"2020-03-30\",\n    \"note\": null,\n    \"location_type\": \"Outdoor\",\n    \"status\": \"A\",\n    \"direction_1\": \"East2\",\n    \"direction_2\": \"West\",\n    \"latitude\": -37.81380668,\n    \"longitude\": 144.96516718,\n    \"location\": {\n      \"lon\": 144.96516718,\n      \"lat\": -37.81380668\n    }\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:6060/v1/postDevice",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6060",
+					"path": [
+						"v1",
+						"postDevice"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post device location data extra property",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\n    \"extra\": 4,\n    \"location_id\": 10,\n    \"sensor_description\": \"Bourke Street Mall (South)\",\n    \"sensor_name\": \"Bou283_T\",\n    \"installation_date\": \"2020-03-30\",\n    \"note\": null,\n    \"location_type\": \"Outdoor\",\n    \"status\": \"A\",\n    \"direction_1\": \"East\",\n    \"direction_2\": \"West\",\n    \"latitude\": -37.81380668,\n    \"longitude\": 144.96516718,\n    \"location\": {\n      \"lon\": 144.96516718,\n      \"lat\": -37.81380668\n    }\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:6060/v1/postDevice",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6060",
+					"path": [
+						"v1",
+						"postDevice"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post pedestrian",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"timestamp\": \"2023-07-24T17:00:00+00:00\", \n    \"locationid\": \"29\", \n    \"direction_1\": 4, \n    \"direction_2\": 5, \n    \"total_of_directions\": 9\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:6060/v1/postPedestrian",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6060",
+					"path": [
+						"v1",
+						"postPedestrian"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post multiple device location data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n    \"devices\":[\n    {\n        \"location_id\": 202,\n        \"sensor_description\": \"Bourke Street Mall (South)\",\n        \"sensor_name\": \"Bou283_T\",\n        \"installation_date\": \"2009-03-30\",\n        \"note\": null,\n        \"location_type\": \"Outdoor\",\n        \"status\": \"A\",\n        \"direction_1\": \"East\",\n        \"direction_2\": \"West\",\n        \"latitude\": -37.81380668,\n        \"longitude\": 144.96516718,\n        \"location\": {\n        \"lon\": 144.96516718,\n        \"lat\": -37.81380668\n        }\n    },\n    {\n        \"location_id\": 402,\n        \"sensor_description\": \"Town Hall (West)\",\n        \"sensor_name\": \"Swa123_T\",\n        \"installation_date\": \"2009-03-23\",\n        \"note\": null,\n        \"location_type\": \"Outdoor\",\n        \"status\": \"A\",\n        \"direction_1\": \"North\",\n        \"direction_2\": \"South\",\n        \"latitude\": -37.81487988,\n        \"longitude\": 144.9660878,\n        \"location\": {\n        \"lon\": 144.9660878,\n        \"lat\": -37.81487988\n        }\n    }\n]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:6060/v1/postDevices",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6060",
+					"path": [
+						"v1",
+						"postDevices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post multiple pedestrian data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n    \"pedestrians\":[\n  {\n    \"timestamp\": \"2023-06-01T17:00:00+00:00\",\n    \"locationid\": \"57\",\n    \"direction_1\": 5,\n    \"direction_2\": 6,\n    \"total_of_directions\": 11\n  },\n  {\n    \"timestamp\": \"2023-06-02T01:00:00+00:00\",\n    \"locationid\": \"57\",\n    \"direction_1\": 183,\n    \"direction_2\": 239,\n    \"total_of_directions\": 422\n  },\n  {\n    \"timestamp\": \"2023-06-02T13:00:00+00:00\",\n    \"locationid\": \"57\",\n    \"direction_1\": 22,\n    \"direction_2\": 24,\n    \"total_of_directions\": 46\n  }\n    ]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:6060/v1/postPedestrians",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6060",
+					"path": [
+						"v1",
+						"postPedestrians"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get  Device by location by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6060/v1/getDeviceByLocation/401",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6060",
+					"path": [
+						"v1",
+						"getDeviceByLocation",
+						"401"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get ped by id and date",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6060/v1/getRawPedestrian/5/?startDate=2023-06-01T01:00:00Z&endDate=2023-07-31T01:00:00Z",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6060",
+					"path": [
+						"v1",
+						"getRawPedestrian",
+						"5",
+						""
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "2023-06-01T01:00:00Z"
+						},
+						{
+							"key": "endDate",
+							"value": "2023-07-31T01:00:00Z"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Device by Location with wrong ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6060/v1/getDeviceByLocation/a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6060",
+					"path": [
+						"v1",
+						"getDeviceByLocation",
+						"a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Ped with wrong date",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6060/v1/getRawPedestrian/1/?startDate=a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6060",
+					"path": [
+						"v1",
+						"getRawPedestrian",
+						"1",
+						""
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "a"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get pedestrian with empty date param",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6060/v1/getRawPedestrian/10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6060",
+					"path": [
+						"v1",
+						"getRawPedestrian",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get full pedestrian",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6060/v1/getFullPedestrian/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6060",
+					"path": [
+						"v1",
+						"getFullPedestrian",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get healtth status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6060/v1/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6060",
+					"path": [
+						"v1",
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,41 @@
+{
+  "name": "countapiserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "source/server.ts",
+  "scripts": {
+    "dev": "nodemon source/server.ts",
+    "build": "rm -rf build/ && prettier --write source/ && tsc",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.22.19",
+    "@babel/preset-env": "^7.22.15",
+    "@babel/preset-typescript": "^7.22.15",
+    "@jest-mock/express": "^2.0.2",
+    "@types/jest": "^29.5.4",
+    "aws-sdk-mock": "^5.8.0",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@joi/date": "^2.1.0",
+    "@types/axios": "^0.14.0",
+    "@types/express": "^4.17.17",
+    "@types/morgan": "^1.9.5",
+    "aws-sdk": "^2.1454.0",
+    "axios": "^1.5.0",
+    "express": "^4.18.2",
+    "joi": "^17",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.0.1",
+    "ts-node": "^10.9.1",
+    "tslog": "^4",
+    "typescript": "^5.2.2"
+  }
+}

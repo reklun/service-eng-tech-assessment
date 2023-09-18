@@ -1,3 +1,13 @@
+## Instructions
+
+Instructions and API documents are placed under './documents'.
+
+Copy the JSON file aws_cred.json under ./aws_cred directory
+
+The Postman contains sample GET/POST requests.
+
+A swagger file is included with starting and testing commands with API description.
+
 ## Task
 
 This is a timeboxed task that requires you to design & develop a set of APIs that can receive pedestrian data form the city of melbourne IoT devices, push into a database and then expose it as a data API service for a consumer.

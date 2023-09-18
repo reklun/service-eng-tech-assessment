@@ -1,0 +1,537 @@
+openapi: 3.0.3
+info:
+  title: Location and Pedestrian API
+  description: |-
+    This is a sample Location and Pedestrian API for posting and getting data. The API is written in Typescript calling AWS DynamoDB as backing database.
+    
+    Copy the JSON file `aws_cred.json` under `./aws_cred` directory
+    
+    To run the server, run `npm run dev` to pull all dependency and have the server running on `Port 6060`. The status can be checked by sending `http://localhost:6060/v1/health`.
+    
+    To run unit tests run `npm run test`.
+    
+    There is a Postman file `Counter.postman_collection.json` under document directory to assist testing.
+    
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: v1
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: http://localhost:6060/v1
+tags:
+  - name: health
+    description: Return server status
+  - name: Pedestrian
+    description: Access to PedestrianData
+  - name: Location
+    description: Access to LocationData
+paths:
+  /health:
+    get:
+      tags:
+        - health
+      summary: Health check
+      description: Return server status
+      operationId: Health
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Health'          
+        '500':
+          description: Server error
+  /getRawPedestrian/{locationId}:
+    get:
+      tags:
+        - Pedestrian
+      summary: Get one record of raw data of Pedestrian
+      description: Get one record of raw data of Pedestrian
+      operationId: getRawPedestrian
+      parameters:
+        - name: locationId
+          in: path
+          description: Represent the ID of location
+          required: true
+          explode: true
+          schema:
+            type: integer
+        - name: startDate
+          in: query
+          description: ISO Date time
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: 1970-01-01 00:00:00
+        - name: endDate
+          in: query
+          description: ISO Date time
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: current date time
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRawPedestrian'          
+        '400':
+          description: Client validation error
+        '500':
+          description: Server Error
+  /getFullPedestrian/{locationId}:
+    get:
+      tags:
+        - Pedestrian
+      summary: Get records of location data with data of Pedestrian
+      description: Get records of location data with data of Pedestrian
+      operationId: getFullPedestrian
+      parameters:
+        - name: locationId
+          in: path
+          description: Represent the ID of location
+          required: true
+          explode: true
+          schema:
+            type: integer
+        - name: startDate
+          in: query
+          description: ISO Date time
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: 1970-01-01 00:00:00
+        - name: endDate
+          in: query
+          description: ISO Date time
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: current date time
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/GetFullPedestrian'          
+        '400':
+          description: Invalid tag value
+        '500':
+          description: Server Error
+  /getDeviceByLocation/{locationId}:
+    get:
+      tags:
+        - Location
+      summary: Find Device Location by ID
+      description: Returns a device detail
+      operationId: getDeviceByLocation
+      parameters:
+        - name: locationId
+          in: path
+          description: ID of pet to return
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDeviceByLocation'          
+        '400':
+          description: Client validation Error
+        '500':
+          description: Internal Server Error
+  /postPedestrian:
+    post:
+      tags: 
+        - Pedestrian
+      summary: Post a record of Pedestrian
+      description: Post a record of Pedestrian
+      operationId: postPedestrian
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostPedestrian'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostOK' 
+        '400':
+          description: Client validation Error
+        '500':
+          description: Internal Server Error
+  /postPedestrians:
+    post:
+      tags: 
+        - Pedestrian
+      summary: Post a list of Pedestrians
+      description: Post a list of Pedestrians
+      operationId: postPedestrians
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostPedestrians'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostOK' 
+        '400':
+          description: Client validation Error
+        '500':
+          description: Internal Server Error
+  /postDevice:
+    post:
+      tags:
+        - Location
+      summary: Post a device location request
+      description: 'Post a device location request'
+      operationId: postDevice
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostDevice'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostOK' 
+        '400':
+          description: Client validation Error
+        '500':
+          description: Internal Server Error
+  /postDevices:
+    post:
+      tags:
+        - Location
+      summary: Post a list of devices location request
+      description: ''
+      operationId: postDevices
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostDevices'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostOK' 
+        '400':
+          description: Client validation Error
+        '500':
+          description: Internal Server Error
+components:
+  schemas:
+    Health:
+      type: object
+      properties:
+        result:
+          type: string
+          example: ok
+        timestamp:
+          type: string
+          example: 2023-09-17T01:28:00.973Z
+    GetRawPedestrian:
+      type: object
+      properties:
+        result:
+         type: array
+         items:
+          properties:
+            timestamp:
+              type: string
+              example: 2023-07-24T17:00:00+00:00
+            locationid:
+              type: string
+              example: 4
+            direction_1:
+              type: integer
+              example: 4
+            direction_2:
+              type: integer
+              example: 5
+            total_of_directions:
+              type: integer
+              example: 9
+    GetFullPedestrian:
+      type: object
+      properties:
+        result:
+          type: object
+          properties:
+            location_id:
+              format: int64
+              example: 1
+            sensor_description:
+              type: string
+              example: Bourke Street Mall (South)
+            sensor_name:
+              type: string
+              example: Bou283_T
+            installation_date:
+              type: string
+              example: 2020-03-30
+            note:
+              type: string
+              example: null
+            location_type:
+              type: string
+              example: Outdoor
+            status:
+              type: string
+              example: A
+            direction_1:
+              type: string
+              example: East
+            direction_2:
+              type: string
+              example: West
+            latitude:
+              type: number
+              example: -37.81380668
+            longitude:
+              type: number
+              example: 144.96516718
+            location:
+              type: object
+              properties:
+                lon:
+                  type: number
+                  example: 144.96516718
+                lat:
+                  type: number
+                  example: -37.81380668
+            records:
+              type: array
+              items:
+                properties:
+                  timestamp:
+                    type: string
+                    example: 2023-06-02T01:00:00+00:00
+                  direction_1:
+                    type: number
+                    example: 4
+                  direction_2:
+                    type: number
+                    example: 5
+                  total_of_directions:
+                    type: number
+                    example: 9
+    GetDeviceByLocation:
+      type: object
+      properties:
+        result:
+          type: object
+          properties:
+            location_id:
+              format: int64
+              example: 1
+            sensor_description:
+              type: string
+              example: Bourke Street Mall (South)
+            sensor_name:
+              type: string
+              example: Bou283_T
+            installation_date:
+              type: string
+              example: 2020-03-30
+            note:
+              type: string
+              example: null
+            location_type:
+              type: string
+              example: Outdoor
+            status:
+              type: string
+              example: A
+            direction_1:
+              type: string
+              example: East
+            direction_2:
+              type: string
+              example: West
+            latitude:
+              type: number
+              example: -37.81380668
+            longitude:
+              type: number
+              example: 144.96516718
+            location:
+              type: object
+              properties:
+                lon:
+                  type: number
+                  example: 144.96516718
+                lat:
+                  type: number
+                  example: -37.81380668
+    PostPedestrian:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2023-07-24T17:00:00+00:00
+        locationid:
+          type: string
+          example: 4
+        direction_1:
+          type: integer
+          example: 4
+        direction_2:
+          type: integer
+          example: 5
+        total_of_directions:
+          type: integer
+          example: 9
+    PostPedestrians:
+      type: object
+      properties:
+        pedestrians:
+          type: array
+          items:
+            properties:
+              timestamp:
+                type: string
+                example: 2023-07-24T17:00:00+00:00
+              locationid:
+                type: string
+                example: 4
+              direction_1:
+                type: integer
+                example: 4
+              direction_2:
+                type: integer
+                example: 5
+              total_of_directions:
+                type: integer
+                example: 9
+    PostDevice:
+      type: object
+      properties:
+        location_id:
+          format: int64
+          example: 1
+        sensor_description:
+          type: string
+          example: Bourke Street Mall (South)
+        sensor_name:
+          type: string
+          example: Bou283_T
+        installation_date:
+          type: string
+          example: 2020-03-30
+        note:
+          type: string
+          example: null
+        location_type:
+          type: string
+          example: Outdoor
+        status:
+          type: string
+          example: A
+        direction_1:
+          type: string
+          example: East
+        direction_2:
+          type: string
+          example: West
+        latitude:
+          type: number
+          example: -37.81380668
+        longitude:
+          type: number
+          example: 144.96516718
+        location:
+          type: object
+          properties:
+            lon:
+              type: number
+              example: 144.96516718
+            lat:
+              type: number
+              example: -37.81380668
+    PostDevices:
+      type: object
+      properties:
+        devices:
+         type: array
+         items:
+          properties:
+            location_id:
+              format: int64
+              example: 1
+            sensor_description:
+              type: string
+              example: Bourke Street Mall (South)
+            sensor_name:
+              type: string
+              example: Bou283_T
+            installation_date:
+              type: string
+              example: 2020-03-30
+            note:
+              type: string
+              example: null
+            location_type:
+              type: string
+              example: Outdoor
+            status:
+              type: string
+              example: A
+            direction_1:
+              type: string
+              example: East
+            direction_2:
+              type: string
+              example: West
+            latitude:
+              type: number
+              example: -37.81380668
+            longitude:
+              type: number
+              example: 144.96516718
+            location:
+              type: object
+              properties:
+                lon:
+                  type: number
+                  example: 144.96516718
+                lat:
+                  type: number
+                  example: -37.81380668
+    PostOK:
+      type: object
+      properties:
+        result:
+          type: string
+          example: ok
+      
